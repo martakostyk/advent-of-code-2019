@@ -1,4 +1,4 @@
-package com.epam.martak.fuelrequirements;
+package com.martak.adventofcode.fuelrequirements;
 
 import java.util.List;
 import java.util.stream.Collectors;

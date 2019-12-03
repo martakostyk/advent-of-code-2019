@@ -1,4 +1,4 @@
-package com.epam.martak.intcodecomputer;
+package com.martak.adventofcode.intcodecomputer;
 
 public class IntCodeComputer {
 
