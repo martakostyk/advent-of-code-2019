@@ -8,9 +8,10 @@ public class FuelRequirementsCalculator {
     private static final long ZERO = 0L;
 
     public static void main(String[] args) {
-        List<Long> masses = new CsvReader()
+        List<String> masses = new CsvReader()
                 .read("C:\\Users\\Marta_Kostyk\\workspace\\adventofcode\\src\\main\\resources\\input.csv");
-        Long total = new FuelRequirementsCalculator().calculateTotal(masses);
+        Long total =
+                new FuelRequirementsCalculator().calculateTotal(masses.stream().map(Long::valueOf).collect(Collectors.toList()));
         System.out.println(total);
     }
 

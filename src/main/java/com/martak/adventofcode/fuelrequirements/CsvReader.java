@@ -11,12 +11,12 @@ public class CsvReader {
 
     private Logger log = Logger.getLogger(CsvReader.class.getName());
 
-    public List<Long> read(String file) {
+    public List<String> read(String file) {
         String line;
-        List<Long> masses = new ArrayList<>();
+        List<String> masses = new ArrayList<>();
         try (BufferedReader br = new BufferedReader(new FileReader(file))) {
             while ((line = br.readLine()) != null) {
-                masses.add(Long.parseLong(line));
+                masses.add(line);
             }
         } catch (IOException e) {
             log.warning("Cannot read from the given file: " + file);
