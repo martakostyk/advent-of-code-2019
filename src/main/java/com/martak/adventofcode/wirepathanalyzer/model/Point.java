@@ -1,4 +1,4 @@
-package com.martak.adventofcode.wirepathanalyzer;
+package com.martak.adventofcode.wirepathanalyzer.model;
 
 public class Point {
 

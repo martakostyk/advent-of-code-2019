@@ -1,13 +1,13 @@
-package com.martak.adventofcode.intcodecomputer;
+package com.martak.adventofcode.codecomputer;
 
-public class IntCodeComputer {
+public class CodeComputer {
 
     public static void main(String[] args) {
         int[] inputIntCode = getInput();
         inputIntCode[1] = 12;
         inputIntCode[2] = 2;
-        System.out.println(new IntCodeComputer().execute(inputIntCode)[0]);
-        System.out.println(new IntCodeComputer().findPair());
+        System.out.println(new CodeComputer().execute(inputIntCode)[0]);
+        System.out.println(new CodeComputer().findPair());
     }
 
     private int findPair() {

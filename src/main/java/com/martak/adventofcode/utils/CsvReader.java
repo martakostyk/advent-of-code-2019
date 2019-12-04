@@ -1,4 +1,4 @@
-package com.martak.adventofcode.fuelrequirements;
+package com.martak.adventofcode.utils;
 
 import java.io.BufferedReader;
 import java.io.FileReader;

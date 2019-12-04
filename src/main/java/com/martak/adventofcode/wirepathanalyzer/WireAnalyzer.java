@@ -1,6 +1,9 @@
 package com.martak.adventofcode.wirepathanalyzer;
 
-import com.martak.adventofcode.fuelrequirements.CsvReader;
+import com.martak.adventofcode.utils.CsvReader;
+import com.martak.adventofcode.wirepathanalyzer.model.Command;
+import com.martak.adventofcode.wirepathanalyzer.model.CommandParser;
+import com.martak.adventofcode.wirepathanalyzer.model.Point;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,15 +11,17 @@ import java.util.NoSuchElementException;
 
 public class WireAnalyzer {
 
+    private static final String COMA_DELIMITER = ",";
+
     public static void main(String[] args) {
         WireAnalyzer wireAnalyzer = new WireAnalyzer();
         CsvReader csvReader = new CsvReader();
-        List<String> commandsA = csvReader.read(
-                "C:\\Users\\Marta_Kostyk\\workspace\\adventofcode\\src\\main\\resources\\commandsA.csv");
-        List<String> commandsB = csvReader.read(
-                "C:\\Users\\Marta_Kostyk\\workspace\\adventofcode\\src\\main\\resources\\commandsB.csv");
-        List<Point> pathA = wireAnalyzer.getWirePath(commandsA.get(0).split(","));
-        List<Point> pathB = wireAnalyzer.getWirePath(commandsB.get(0).split(","));
+        String[] commandsA = csvReader.read(
+                "C:\\Users\\Marta_Kostyk\\workspace\\adventofcode\\src\\main\\resources\\commandsA.csv").get(0).split(COMA_DELIMITER);
+        String[] commandsB = csvReader.read(
+                "C:\\Users\\Marta_Kostyk\\workspace\\adventofcode\\src\\main\\resources\\commandsB.csv").get(0).split(COMA_DELIMITER);
+        List<Command> pathA = CommandParser.getPath(commandsA);
+        List<Command> pathB = CommandParser.getPath(commandsB);
         List<Point> intersections = wireAnalyzer.findIntersections(pathA, pathB);
         System.out.println(wireAnalyzer.getManhattanDistanceOfClosest(intersections));
     }
@@ -25,47 +30,19 @@ public class WireAnalyzer {
         return intersections.stream()
                 .map(point -> Math.abs(point.getX()) + Math.abs(point.getY()))
                 .sorted()
+                .filter(distance -> distance > 0)
                 .findFirst()
                 .orElseThrow(NoSuchElementException::new);
     }
 
-    public List<Point> getWirePath(String[] commands) {
-        List<Point> points = new ArrayList<>();
-        int x = 0;
-        int y = 0;
-        for (String command : commands) {
-            String direction = command.substring(0, 1);
-            int steps = Integer.valueOf(command.substring(1));
-            switch (direction) {
-                case "R":
-                    x += steps;
-                    break;
-                case "L":
-                    x -= steps;
-                    break;
-                case "U":
-                    y += steps;
-                    break;
-                case "D":
-                    y -= steps;
-                    break;
-            }
-            Point point = new Point(x, y);
-            points.add(point);
-            x = point.getX();
-            y = point.getY();
-        }
-        return points;
-    }
-
-    public List<Point> findIntersections(List<Point> pathA, List<Point> pathB) {
+    public List<Point> findIntersections(List<Command> pathA, List<Command> pathB) {
         List<Point> intersections = new ArrayList<>();
-        for (int i = 0; i < pathA.size() - 1; i++) {
-            for (int j = 0; j < pathB.size() - 1; j++) {
-                Point A1 = pathA.get(i);
-                Point A2 = pathA.get(i + 1);
-                Point B1 = pathB.get(j);
-                Point B2 = pathB.get(j + 1);
+        for (int i = 0; i < pathA.size() ; i++) {
+            for (int j = 0; j < pathB.size() ; j++) {
+                Point A1 = pathA.get(i).getStart();
+                Point A2 = pathA.get(i).getEnd();
+                Point B1 = pathB.get(j).getStart();
+                Point B2 = pathB.get(j).getEnd();
                 int minX = 0;
                 int maxX = 0;
                 int minY = 0;
