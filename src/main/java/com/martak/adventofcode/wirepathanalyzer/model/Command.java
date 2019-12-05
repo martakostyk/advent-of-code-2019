@@ -29,4 +29,14 @@ public class Command {
     public Point getEnd() {
         return end;
     }
+
+    @Override
+    public String toString() {
+        return "Command{" +
+                "direction='" + direction + '\'' +
+                ", steps=" + steps +
+                ", start=" + start +
+                ", end=" + end +
+                '}';
+    }
 }
