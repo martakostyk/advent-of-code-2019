@@ -1,5 +1,10 @@
 package com.martak.adventofcode.securecontainer;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+
 public class PasswordValidation {
 
     public static void main(String[] args) {
@@ -35,9 +40,13 @@ public class PasswordValidation {
     }
 
     private boolean containsTwoTheSameAdjacentDigits(int password) {
-        char[] chars = String.valueOf(password).toCharArray();
-        for (int i = 0; i < chars.length - 1; i++) {
-            if (chars[i] == chars[i + 1]) {
+        List<Integer> digits = Arrays.stream(Integer.toString(password).split("")).map(Integer::valueOf).collect(Collectors.toList());
+        int[] counters = new int[10];
+        for (int i = 0; i < digits.size(); i++) {
+            counters[digits.get(i)]++;
+        }
+        for (int i = 0; i < counters.length; i++) {
+            if (counters[i] == 2) {
                 return true;
             }
         }
