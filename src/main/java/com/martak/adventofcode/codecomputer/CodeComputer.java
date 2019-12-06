@@ -6,21 +6,21 @@ import com.martak.adventofcode.codecomputer.model.OpCodeFactory;
 public class CodeComputer {
 
     public static void main(String[] args) {
-        int[] inputIntCode = getInput();
-        inputIntCode[1] = 12;
-        inputIntCode[2] = 2;
-        System.out.println(new CodeComputer().execute(inputIntCode)[0]);
+        int[] code = getInput();
+        code[1] = 12;
+        code[2] = 2;
+        System.out.println(new CodeComputer().execute(code)[0]);
         System.out.println(new CodeComputer().findPair());
     }
 
     private int findPair() {
         for (int i = 0; i < 100; i++) {
             for (int j = 0; j < 100; j++) {
-                int[] inputIntCode = getInput();
-                inputIntCode[1] = i;
-                inputIntCode[2] = j;
-                execute(inputIntCode);
-                if (inputIntCode[0] == 19690720) {
+                int[] code = getInput();
+                code[1] = i;
+                code[2] = j;
+                execute(code);
+                if (code[0] == 19690720) {
                     return getAnswer(i, j);
                 }
             }
@@ -41,13 +41,13 @@ public class CodeComputer {
                 1, 99, 5, 103, 1, 103, 2, 107, 1, 107, 10, 0, 99, 2, 0, 14, 0};
     }
 
-    private int[] execute(int[] inputIntCode) {
+    private int[] execute(int[] code) {
         int index = 0;
-        while(index < inputIntCode.length) {
-            OpCode opCode = OpCodeFactory.getOpCode(inputIntCode, index);
-            inputIntCode = opCode.execute(inputIntCode, index);
+        while(index < code.length) {
+            OpCode opCode = OpCodeFactory.getOpCode(code, index);
+            code = opCode.execute(code, index);
             index += opCode.getShift();
         }
-        return inputIntCode;
+        return code;
     }
 }
