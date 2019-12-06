@@ -1,5 +1,8 @@
 package com.martak.adventofcode.codecomputer;
 
+import com.martak.adventofcode.codecomputer.model.OpCode;
+import com.martak.adventofcode.codecomputer.model.OpCodeFactory;
+
 public class CodeComputer {
 
     public static void main(String[] args) {
@@ -39,24 +42,11 @@ public class CodeComputer {
     }
 
     private int[] execute(int[] inputIntCode) {
-        for (int i = 0; i < inputIntCode.length - 3; i = i + 4) {
-            int opCode = inputIntCode[i];
-            if (opCode == 99) {
-                return inputIntCode;
-            }
-            int firstIndex = inputIntCode[i + 1];
-            int secondIndex = inputIntCode[i + 2];
-            int outputIndex = inputIntCode[i + 3];
-            switch (opCode) {
-                case 1:
-                    inputIntCode[outputIndex] = inputIntCode[firstIndex] + inputIntCode[secondIndex];
-                    break;
-                case 2:
-                    inputIntCode[inputIntCode[i + 3]] = inputIntCode[firstIndex] * inputIntCode[secondIndex];
-                    break;
-                default:
-                    throw new IllegalArgumentException("unknown opcode " + opCode + ", index " + i);
-            }
+        int index = 0;
+        while(index < inputIntCode.length) {
+            OpCode opCode = OpCodeFactory.getOpCode(inputIntCode, index);
+            inputIntCode = opCode.execute(inputIntCode, index);
+            index += opCode.getShift();
         }
         return inputIntCode;
     }
