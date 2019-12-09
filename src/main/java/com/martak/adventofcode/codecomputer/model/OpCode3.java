@@ -11,8 +11,7 @@ public class OpCode3 implements OpCode {
     @Override
     public int[] execute(int[] code, int index) {
         int address = code[index + 1];
-        // TODO implement input value to store in the given address
-        code[address] = 0;
+        code[address] = 1;
         return code;
     }
 
