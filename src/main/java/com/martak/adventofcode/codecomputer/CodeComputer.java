@@ -3,6 +3,8 @@ package com.martak.adventofcode.codecomputer;
 import com.martak.adventofcode.codecomputer.model.OpCode;
 import com.martak.adventofcode.codecomputer.model.OpCodeFactory;
 
+import java.util.Optional;
+
 public class CodeComputer {
 
     public static void main(String[] args) {
@@ -47,9 +49,12 @@ public class CodeComputer {
     private int[] execute(int[] code, int systemId) {
         int index = 0;
         while (index < code.length) {
-            OpCode opCode = OpCodeFactory.getOpCode(code, index, systemId);
-            code = opCode.execute(code, index);
-            index += opCode.getShift();
+            Optional<OpCode> result = OpCodeFactory.getOpCode(code, index, systemId);
+            if (result.isPresent()) {
+                OpCode opCode = result.get();
+                code = opCode.execute(code, index);
+                index += opCode.getShift();
+            }
         }
         return code;
     }

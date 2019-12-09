@@ -1,12 +1,11 @@
 package com.martak.adventofcode.codecomputer.model;
 
-public class OpCode2 implements OpCode {
-
+public class OpCode7 implements OpCode {
     private final int shift;
     private final int firstArgMode;
     private final int secondArgMode;
 
-    OpCode2(int shift, int firstArgMode, int secondArgMode) {
+    public OpCode7(int shift, int firstArgMode, int secondArgMode) {
         this.shift = shift;
         this.firstArgMode = firstArgMode;
         this.secondArgMode = secondArgMode;
@@ -23,12 +22,16 @@ public class OpCode2 implements OpCode {
         if (secondArgMode == 0) {
             second = code[second];
         }
-        code[outputIndex] = first * second;
+        if (first < second) {
+            code[outputIndex] = 1;
+        } else {
+            code[outputIndex] = 0;
+        }
         return code;
     }
 
     @Override
     public int getShift() {
-        return shift;
+        return this.shift;
     }
 }
