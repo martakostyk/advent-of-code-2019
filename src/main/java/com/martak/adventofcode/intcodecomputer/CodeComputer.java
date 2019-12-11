@@ -28,7 +28,7 @@ public class CodeComputer {
         return 0;
     }
 
-    private String execute(int[] code, int[] inputSignals) {
+    public String execute(int[] code, int[] inputSignals) {
         int index = 0;
         StringBuilder output = new StringBuilder();
         OpCodeFactory opCodeFactory = new OpCodeFactory(inputSignals);
