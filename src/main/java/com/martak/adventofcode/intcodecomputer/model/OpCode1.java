@@ -1,4 +1,4 @@
-package com.martak.adventofcode.codecomputer.model;
+package com.martak.adventofcode.intcodecomputer.model;
 
 public class OpCode1 implements OpCode {
 
