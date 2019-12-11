@@ -2,10 +2,7 @@ package com.martak.adventofcode.universalorbitmap;
 
 import com.martak.adventofcode.utils.CsvReader;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class OrbitMap {
 
@@ -13,10 +10,34 @@ public class OrbitMap {
         CsvReader csvReader = new CsvReader();
         List<String> mapData = csvReader
                 .read("C:\\Users\\Marta_Kostyk\\workspace\\adventofcode\\src\\main\\resources\\orbitmap.csv");
-        List<Orbit> orbits = OrbitMap.parse(mapData);
-        int result = OrbitMap.countChecksum(orbits);
-        System.out.println(result);
+        Map<String, Orbit> orbits = OrbitMap.parse(mapData);
+//        int result = OrbitMap.countChecksum(new ArrayList<>(orbits.values()));
+//        System.out.println(result);
+        int orbitalTransfers = OrbitMap.getToSanta(orbits);
+        System.out.println(orbitalTransfers);
     }
+
+    static int getToSanta(Map<String, Orbit> orbits) {
+        Orbit me = orbits.get("YOU");
+        Orbit santa = orbits.get("SAN");
+        List<Orbit> myOrbits = new ArrayList<>();
+        while (me.getParent() != null) {
+            me = me.getParent();
+            myOrbits.add(me);
+        }
+        int counter = 0;
+        while (santa.getParent() != null) {
+            counter++;
+            int index = myOrbits.indexOf(santa.getParent());
+            if (index != -1) {
+                counter += index - 1;
+                break;
+            }
+            santa = santa.getParent();
+        }
+        return counter;
+    }
+
 
     static int countChecksum(List<Orbit> orbits) {
         int counter = 0;
@@ -29,7 +50,7 @@ public class OrbitMap {
         return counter;
     }
 
-    static List<Orbit> parse(List<String> mapData) {
+    static Map<String, Orbit> parse(List<String> mapData) {
         Map<String, Orbit> orbits = new HashMap<>();
         for (String orbitData : mapData) {
             String[] splitted = orbitData.split("\\)");
@@ -44,6 +65,6 @@ public class OrbitMap {
             Orbit right = orbits.get(splitted[1]);
             right.setParent(left);
         }
-        return new ArrayList<>(orbits.values());
+        return orbits;
     }
 }
