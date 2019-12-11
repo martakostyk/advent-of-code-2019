@@ -24,7 +24,7 @@ public class WireAnalyzer {
         List<Command> pathB = CommandParser.getPath(commandsB);
         Map<Point, Integer> intersections = wireAnalyzer.findIntersections(pathA, pathB);
         Integer result = wireAnalyzer.getFewestSteps(intersections);
-        System.out.println(result);
+        System.out.println("Fewest steps to wires intersection " + result);
     }
 
     public Integer getFewestSteps(Map<Point, Integer> intersections) {

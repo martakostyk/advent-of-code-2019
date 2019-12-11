@@ -3,44 +3,31 @@ package com.martak.adventofcode.securecontainer;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 public class PasswordValidation {
 
     public static void main(String[] args) {
         Range range = new Range(307237, 769058);
-        PasswordValidation passwordValidation = new PasswordValidation(range);
+        PasswordValidation passwordValidation = new PasswordValidation();
         int counter = 0;
         for (int i = range.getMin(); i <= range.getMax(); i++) {
             if (passwordValidation.check(i)) {
                 counter++;
             }
         }
-        System.out.println(counter);
-    }
-
-    private final Range range;
-
-    public PasswordValidation(Range range) {
-        this.range = range;
+        System.out.println("Number of valid password combinations " + counter);
     }
 
     public boolean check(int password) {
-//        if (!isWithinTheRange(password)) {
-//            return false;
-//        }
         if (!containsTwoTheSameAdjacentDigits(password)) {
             return false;
         }
         return containsNoDecreasingPair(password);
     }
 
-    private boolean isWithinTheRange(int password) {
-        return password >= range.getMin() && password <= range.getMax();
-    }
-
     private boolean containsTwoTheSameAdjacentDigits(int password) {
-        List<Integer> digits = Arrays.stream(Integer.toString(password).split("")).map(Integer::valueOf).collect(Collectors.toList());
+        List<Integer> digits = Arrays.stream(Integer.toString(password).split(""))
+                .map(Integer::valueOf).collect(Collectors.toList());
         int[] counters = new int[10];
         for (int i = 0; i < digits.size(); i++) {
             counters[digits.get(i)]++;

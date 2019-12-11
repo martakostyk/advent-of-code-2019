@@ -11,10 +11,10 @@ public class OrbitMap {
         List<String> mapData = csvReader
                 .read("C:\\Users\\Marta_Kostyk\\workspace\\adventofcode\\src\\main\\resources\\orbitmap.csv");
         Map<String, Orbit> orbits = OrbitMap.parse(mapData);
-//        int result = OrbitMap.countChecksum(new ArrayList<>(orbits.values()));
-//        System.out.println(result);
+        int result = OrbitMap.countChecksum(new ArrayList<>(orbits.values()));
+        System.out.println("Number of orbits " + result);
         int orbitalTransfers = OrbitMap.getToSanta(orbits);
-        System.out.println(orbitalTransfers);
+        System.out.println("Number of orbital transfers to get to Santa " + orbitalTransfers);
     }
 
     static int getToSanta(Map<String, Orbit> orbits) {

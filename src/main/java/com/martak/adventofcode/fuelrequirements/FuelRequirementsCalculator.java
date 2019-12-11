@@ -16,7 +16,7 @@ public class FuelRequirementsCalculator {
                 .map(Long::valueOf)
                 .collect(Collectors.toList());
         Long total = new FuelRequirementsCalculator().calculateTotal(masses);
-        System.out.println(total);
+        System.out.println("Total fuel requirements " + total);
     }
 
     private Long calculateTotal(List<Long> masses) {
