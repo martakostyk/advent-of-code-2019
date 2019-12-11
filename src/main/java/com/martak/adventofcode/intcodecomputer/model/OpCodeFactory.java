@@ -5,7 +5,15 @@ public class OpCodeFactory {
     private static final int SHIFT_2 = 2;
     private static final int SHIFT_4 = 4;
 
-    public static OpCode getOpCode(int[] inputIntCode, int index, int systemId) {
+    private final int[] inputSignals;
+    private int signalIndex;
+
+    public OpCodeFactory(int[] inputSignals) {
+        this.inputSignals = inputSignals;
+        this.signalIndex = 0;
+    }
+
+    public OpCode getOpCode(int[] inputIntCode, int index) {
         int opCodeValues = inputIntCode[index];
         int opCode = opCodeValues % 100;
         int firstArgMode = (opCodeValues / 100) % 10;
@@ -16,7 +24,11 @@ public class OpCodeFactory {
             case 2:
                 return new OpCode2(SHIFT_4, firstArgMode, secondArgMode);
             case 3:
-                return new OpCode3(SHIFT_2, systemId);
+                if (inputSignals.length == 1) {
+                    return new OpCode3(SHIFT_2, inputSignals[0]);
+                }
+                int signal = inputSignals[signalIndex++];
+                return new OpCode3(SHIFT_2, signal);
             case 4:
                 return new OpCode4(SHIFT_2);
             case 99:

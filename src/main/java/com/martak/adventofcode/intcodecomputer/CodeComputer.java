@@ -9,7 +9,7 @@ public class CodeComputer {
     public static void main(String[] args) {
         int systemId = Integer.parseInt(args[0]);
         int[] diagnosticTests = InputStorage.getDiagnosticTests();
-        String output = new CodeComputer().execute(diagnosticTests, systemId);
+        String output = new CodeComputer().execute(diagnosticTests, new int[] {systemId});
         System.out.println("Code computer output " + output);
     }
 
@@ -19,7 +19,7 @@ public class CodeComputer {
                 int[] code = InputStorage.getInput();
                 code[1] = i;
                 code[2] = j;
-                execute(code, 0);
+                execute(code, new int[] {0});
                 if (code[0] == 19690720) {
                     return 100 * i + j;
                 }
@@ -28,11 +28,12 @@ public class CodeComputer {
         return 0;
     }
 
-    private String execute(int[] code, int systemId) {
+    private String execute(int[] code, int[] inputSignals) {
         int index = 0;
         StringBuilder output = new StringBuilder();
+        OpCodeFactory opCodeFactory = new OpCodeFactory(inputSignals);
         while (index < code.length) {
-            OpCode opCode = OpCodeFactory.getOpCode(code, index, systemId);
+            OpCode opCode = opCodeFactory.getOpCode(code, index);
             code = opCode.execute(code, index);
             index += opCode.getShift();
             output.append(opCode.getOutput());
