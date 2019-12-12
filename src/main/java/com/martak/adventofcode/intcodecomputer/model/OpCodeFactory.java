@@ -4,6 +4,7 @@ public class OpCodeFactory {
 
     private static final int SHIFT_2 = 2;
     private static final int SHIFT_4 = 4;
+    private static final int SHIFT_3 = 3;
 
     private final int[] inputSignals;
     private int signalIndex;
@@ -31,6 +32,14 @@ public class OpCodeFactory {
                 return new OpCode3(SHIFT_2, signal);
             case 4:
                 return new OpCode4(SHIFT_2);
+            case 5:
+                return new OpCode5(firstArgMode, secondArgMode, SHIFT_3);
+            case 6:
+                return new OpCode6(firstArgMode, secondArgMode, SHIFT_3);
+            case 7:
+                return new OpCode7(SHIFT_4, firstArgMode, secondArgMode);
+            case 8:
+                return new OpCode8(SHIFT_4, firstArgMode, secondArgMode);
             case 99:
                 return new OpCode99(inputIntCode.length - index);
             default:

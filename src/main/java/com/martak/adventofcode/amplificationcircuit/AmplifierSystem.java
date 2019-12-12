@@ -1,7 +1,5 @@
 package com.martak.adventofcode.amplificationcircuit;
 
-import com.martak.adventofcode.intcodecomputer.CodeComputer;
-
 import java.util.List;
 
 public class AmplifierSystem {
