@@ -10,27 +10,26 @@ public class ImageDecoder {
         int width = 25;
         int height = 6;
         Image image = new ImageDecoder().decode(imageData, width, height);
-        ImagePrinter.print(image);
-        int answer = getAnswer(image);
-        System.out.println("The answer " + answer);
+        ImagePrinter.print(image.getLayers());
+        int answer = getAnswerForFirstStar(image);
+        System.out.println("The answer for first star " + answer);
+        Layer finalImage = stackLayers(image.getLayers(), width, height);
+        ImagePrinter.print(finalImage);
     }
 
-    private static int getAnswer(Image image) {
-        int[] numOfDigits = new int[10];
-        for (Layer layer : image.getLayers()) {
-            int[][] pixels = layer.getPixels();
-            int[] layerNumOdDigits = new int[10];
-            for (int i = 0; i < pixels.length; i++) {
-                for (int j = 0; j < pixels[i].length; j++) {
-                    int digit = pixels[i][j];
-                    layerNumOdDigits[digit]++;
+    private static Layer stackLayers(List<Layer> layers, int width, int height) {
+        int[][] pixels = layers.get(0).getPixels();
+        for (int h = 0; h < height; h++) {
+            for (int w = 0; w < width; w++) {
+                int layerIndex = 1;
+                while (pixels[h][w] == 2 && layerIndex < layers.size()) {
+                    pixels[h][w] = layers.get(layerIndex++).getPixels()[h][w];
                 }
             }
-            if (numOfDigits[0] == 0 || layerNumOdDigits[0] < numOfDigits[0]) {
-                numOfDigits = layerNumOdDigits;
-            }
         }
-        return numOfDigits[1] * numOfDigits[2];
+        Layer finalLayer = new Layer(width, height);
+        finalLayer.setPixels(pixels);
+        return finalLayer;
     }
 
     private Image decode(String imageData, int width, int height) {
@@ -48,6 +47,24 @@ public class ImageDecoder {
             layers.add(layer);
         }
         return new Image(layers);
+    }
+
+    private static int getAnswerForFirstStar(Image image) {
+        int[] numOfDigits = new int[10];
+        for (Layer layer : image.getLayers()) {
+            int[][] pixels = layer.getPixels();
+            int[] layerNumOdDigits = new int[10];
+            for (int i = 0; i < pixels.length; i++) {
+                for (int j = 0; j < pixels[i].length; j++) {
+                    int digit = pixels[i][j];
+                    layerNumOdDigits[digit]++;
+                }
+            }
+            if (numOfDigits[0] == 0 || layerNumOdDigits[0] < numOfDigits[0]) {
+                numOfDigits = layerNumOdDigits;
+            }
+        }
+        return numOfDigits[1] * numOfDigits[2];
     }
 
     private static String getImageData() {
