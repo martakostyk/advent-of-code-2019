@@ -7,16 +7,12 @@ public class Amplifier {
     private int phase;
     private CodeComputer codeComputer;
 
-    public Amplifier(int phase, CodeComputer codeComputer) {
+    Amplifier(int phase, CodeComputer codeComputer) {
         this.phase = phase;
         this.codeComputer = codeComputer;
     }
 
-    public int getPhase() {
-        return phase;
-    }
-
-    public String execute(int[] code, int[] inputSignals) {
-        return codeComputer.execute(code, inputSignals);
+    public String execute(int[] code, int input) {
+        return codeComputer.execute(code, new int[] {this.phase, input});
     }
 }

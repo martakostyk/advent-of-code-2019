@@ -2,7 +2,7 @@ package com.martak.adventofcode.amplificationcircuit;
 
 public class PhaseSequenceGenerator {
 
-    public static int[][] getAllSequenceCombinations(int min, int max) {
+    public static int[][] getAllCombinations(int min, int max) {
         int numOfPhases = max - min + 1;
         int numOfCombinations = getNumOfCombinations(numOfPhases);
         int[][] phaseSequences = new int[numOfCombinations][numOfPhases];

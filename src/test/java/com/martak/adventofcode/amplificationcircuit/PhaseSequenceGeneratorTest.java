@@ -13,7 +13,7 @@ public class PhaseSequenceGeneratorTest {
         int min = 0;
         int max = 4;
         // when
-        int[][] actual = PhaseSequenceGenerator.getAllSequenceCombinations(min, max);
+        int[][] actual = PhaseSequenceGenerator.getAllCombinations(min, max);
         // then
         Assertions.assertThat(actual.length).isEqualTo(120);
     }

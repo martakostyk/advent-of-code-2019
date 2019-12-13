@@ -6,33 +6,31 @@ import java.util.List;
 
 public class AmplifierSystem {
 
-    private final List<Amplifier> amplifiers;
+    public static void main(String[] args) {
+        int[] controllerSoftware = InputStorage.getControllerSoftware();
+        int[][] phaseSequences = PhaseSequenceGenerator.getAllCombinations(0, 4);
 
-    public AmplifierSystem(List<Amplifier> amplifiers) {
-        this.amplifiers = amplifiers;
+        String theBiggest = findTheBiggestOutputSignal(phaseSequences, controllerSoftware);
+        System.out.println("The biggest output signal " + theBiggest);
     }
 
-    public static void main(String[] args) {
-        int[][] phaseSequenceCombinations = PhaseSequenceGenerator.getAllSequenceCombinations(0, 4);
-        int[] controllerSoftware = InputStorage.getControllerSoftware();
+    public static String findTheBiggestOutputSignal(int[][] phaseSequences, int[] controllerSoftware) {
         String theBiggestThrusterSignal = "";
-        for (int[] phaseSequence : phaseSequenceCombinations) {
+        for (int[] phaseSequence : phaseSequences) {
             List<Amplifier> amplifiers = AmplifierFactory.getAmplifiers(phaseSequence);
-            AmplifierSystem amplifierSystem = new AmplifierSystem(amplifiers);
-            String thrusterSignal = amplifierSystem.execute(controllerSoftware);
+            String thrusterSignal = AmplifierSystem.execute(amplifiers, controllerSoftware);
             if (thrusterSignal.compareTo(theBiggestThrusterSignal) > 0) {
                 theBiggestThrusterSignal = thrusterSignal;
             }
         }
-        System.out.println("The biggest thruster signal " + theBiggestThrusterSignal);
+        return theBiggestThrusterSignal;
     }
 
-    public String execute(int[] controllerSoftware) {
+    public static String execute(List<Amplifier> amplifiers, int[] controllerSoftware) {
         int output = 0;
         for (int i = 0; i < 5; i++) {
             Amplifier amplifier = amplifiers.get(i);
-            int[] inputSignals = new int[]{amplifier.getPhase(), output};
-            output = Integer.valueOf(amplifier.execute(controllerSoftware, inputSignals));
+            output = Integer.valueOf(amplifier.execute(controllerSoftware, output));
         }
         return String.valueOf(output);
     }
