@@ -10,9 +10,9 @@ public class ImageDecoder {
         int width = 25;
         int height = 6;
         Image image = new ImageDecoder().decode(imageData, width, height);
-        ImagePrinter.print(image.getLayers());
-        int answer = getAnswerForFirstStar(image);
-        System.out.println("The answer for first star " + answer);
+//        ImagePrinter.print(image.getLayers());
+//        int answer = getAnswerForFirstStar(image);
+//        System.out.println("The answer for first star " + answer);
         Layer finalImage = stackLayers(image.getLayers(), width, height);
         ImagePrinter.print(finalImage);
     }

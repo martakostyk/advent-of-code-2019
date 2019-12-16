@@ -9,7 +9,7 @@ public class CodeComputerTest {
     public void test1a() {
         int input = 0;
         int[] diagnosticTests = new int[]{3,12,6,12,15,1,13,14,13,4,13,99,-1,0,1,9};
-        String output = new CodeComputer().execute(diagnosticTests, new int[] {input});
+        String output = new CodeComputer().execute(diagnosticTests, new int[]{input});
         Assert.assertEquals(Integer.valueOf(output), Integer.valueOf(0));
     }
 
@@ -36,5 +36,4 @@ public class CodeComputerTest {
         String output = new CodeComputer().execute(diagnosticTests, new int[] {input});
         Assert.assertEquals(Integer.valueOf(output), Integer.valueOf(1));
     }
-
 }
