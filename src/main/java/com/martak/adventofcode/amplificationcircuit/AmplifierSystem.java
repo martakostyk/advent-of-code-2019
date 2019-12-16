@@ -17,8 +17,8 @@ public class AmplifierSystem {
     public static String findTheBiggestOutputSignal(int[][] phaseSequences, int[] controllerSoftware) {
         String theBiggestThrusterSignal = "";
         for (int[] phaseSequence : phaseSequences) {
-            List<Amplifier> amplifiers = AmplifierFactory.getAmplifiers(phaseSequence);
-            String thrusterSignal = AmplifierSystem.execute(amplifiers, controllerSoftware);
+            List<Amplifier> amplifiers = AmplifierFactory.getAmplifiers(phaseSequence, controllerSoftware);
+            String thrusterSignal = AmplifierSystem.execute(amplifiers);
             if (thrusterSignal.compareTo(theBiggestThrusterSignal) > 0) {
                 theBiggestThrusterSignal = thrusterSignal;
             }
@@ -26,13 +26,26 @@ public class AmplifierSystem {
         return theBiggestThrusterSignal;
     }
 
-    public static String execute(List<Amplifier> amplifiers, int[] controllerSoftware) {
-        int output = 0;
-        for (int i = 0; i < 5; i++) {
-            Amplifier amplifier = amplifiers.get(i);
-            output = Integer.valueOf(amplifier.execute(controllerSoftware, output));
+    public static String execute(List<Amplifier> amplifiers) {
+        boolean isFinalLoopProcessed = false;
+        while (!isFinalLoopProcessed) {
+            int output = 0;
+            for (int i = 0; i < 5; i++) {
+                Amplifier amplifier = amplifiers.get(i);
+                int[] inputs = amplifier.getContext().getInputs();
+                if (inputs.length > 1) {
+                    inputs[1] = output;
+                } else {
+                    inputs[0] = output;
+                }
+                amplifier.getContext().setInputs(inputs);
+                amplifier.execute();
+                output = Integer.valueOf(amplifier.getContext().getOutput());
+                if (i == amplifiers.size() - 1 && amplifier.getContext().getPointer() == amplifier.getContext().getCode().length) {
+                    isFinalLoopProcessed = !isFinalLoopProcessed;
+                }
+            }
         }
-        return String.valueOf(output);
+        return amplifiers.get(4).getContext().getOutput();
     }
-
 }

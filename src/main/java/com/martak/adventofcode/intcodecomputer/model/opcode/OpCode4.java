@@ -9,7 +9,7 @@ public class OpCode4 implements OpCode {
         int[] code = context.getCode();
         int pointer = context.getPointer();
         int address = code[pointer + 1];
-        String output = String.valueOf(code[address]);
+        String output = context.getOutput() + code[address];
         return new Context(pointer + 2, code, context.getInputs(), output);
     }
 }

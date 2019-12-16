@@ -14,7 +14,7 @@ public class OpCode3 implements OpCode {
         int[] inputs = context.getInputs();
         code[address] = inputs[0];
         if (inputs.length > 1) {
-            inputs = Arrays.copyOfRange(inputs, 1, inputs.length);
+            inputs = new int[]{inputs[1]};
         }
         return new Context(pointer + 2, code, inputs, context.getOutput());
     }

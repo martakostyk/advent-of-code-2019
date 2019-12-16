@@ -1,18 +1,23 @@
 package com.martak.adventofcode.amplificationcircuit;
 
 import com.martak.adventofcode.intcodecomputer.CodeComputer;
+import com.martak.adventofcode.intcodecomputer.model.Context;
 
 public class Amplifier {
 
-    private int phase;
-    private CodeComputer codeComputer;
+    private final CodeComputer codeComputer;
+    private Context context;
 
-    Amplifier(int phase, CodeComputer codeComputer) {
-        this.phase = phase;
+    Amplifier(CodeComputer codeComputer, Context context) {
         this.codeComputer = codeComputer;
+        this.context = context;
     }
 
-    public String execute(int[] code, int input) {
-        return codeComputer.execute(code, new int[] {this.phase, input});
+    public void execute() {
+        context = codeComputer.execute(context);
+    }
+
+    public Context getContext() {
+        return this.context;
     }
 }

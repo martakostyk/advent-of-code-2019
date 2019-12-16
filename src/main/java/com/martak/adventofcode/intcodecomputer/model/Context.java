@@ -3,7 +3,7 @@ package com.martak.adventofcode.intcodecomputer.model;
 public class Context {
     private final int pointer;
     private final int[] code;
-    private final int[] inputs;
+    private int[] inputs;
     private String output;
 
     public Context(int pointer, int[] code, int[] inputs, String output) {
@@ -23,6 +23,10 @@ public class Context {
 
     public int[] getInputs() {
         return inputs;
+    }
+
+    public void setInputs(int[] inputs) {
+        this.inputs = inputs;
     }
 
     public String getOutput() {
