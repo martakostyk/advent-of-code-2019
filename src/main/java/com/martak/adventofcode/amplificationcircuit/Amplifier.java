@@ -14,7 +14,7 @@ public class Amplifier {
     }
 
     public void execute() {
-        context = codeComputer.execute(context);
+        this.context = codeComputer.execute(this.context);
     }
 
     public Context getContext() {

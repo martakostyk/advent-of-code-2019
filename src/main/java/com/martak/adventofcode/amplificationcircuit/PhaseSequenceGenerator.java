@@ -16,11 +16,11 @@ public class PhaseSequenceGenerator {
                                 if (l != i && l != j && l != k) {
                                     for (int m = min; m <= max; m++) {
                                         if (m != i && m != j && m != k && m != l) {
-                                            phaseSequences[phaseSequenceIndex][i] = 0;
-                                            phaseSequences[phaseSequenceIndex][j] = 1;
-                                            phaseSequences[phaseSequenceIndex][k] = 2;
-                                            phaseSequences[phaseSequenceIndex][l] = 3;
-                                            phaseSequences[phaseSequenceIndex][m] = 4;
+                                            phaseSequences[phaseSequenceIndex][0] = i;
+                                            phaseSequences[phaseSequenceIndex][1] = j;
+                                            phaseSequences[phaseSequenceIndex][2] = k;
+                                            phaseSequences[phaseSequenceIndex][3] = l;
+                                            phaseSequences[phaseSequenceIndex][4] = m;
                                             phaseSequenceIndex++;
                                         }
 

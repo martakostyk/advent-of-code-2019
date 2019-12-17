@@ -11,10 +11,10 @@ public class OpCode3 implements OpCode {
         int[] code = context.getCode();
         int pointer = context.getPointer();
         int address = code[pointer + 1];
-        int[] inputs = context.getInputs();
-        code[address] = inputs[0];
+        long[] inputs = context.getInputs();
+        code[address] = (int)inputs[0];
         if (inputs.length > 1) {
-            inputs = new int[]{inputs[1]};
+            inputs = new long[]{inputs[1]};
         }
         return new Context(pointer + 2, code, inputs, context.getOutput());
     }
