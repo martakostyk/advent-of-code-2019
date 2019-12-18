@@ -1,6 +1,8 @@
 package com.martak.adventofcode.intcodecomputer.model.opcode;
 
 import com.martak.adventofcode.intcodecomputer.model.Context;
+import com.martak.adventofcode.intcodecomputer.model.argmode.ArgMode;
+import com.martak.adventofcode.intcodecomputer.model.argmode.ArgModeFactory;
 
 public class OpCode8 implements OpCode {
 
@@ -8,17 +10,12 @@ public class OpCode8 implements OpCode {
     public Context execute(Context context) {
         int[] code = context.getCode();
         int pointer = context.getPointer();
-        int[] argModes = getArgModes(code[pointer]);
-        int first = code[pointer + 1];
-        if (argModes[0] == 0) {
-            first = code[first];
-        }
-        int second = code[pointer + 2];
-        if (argModes[1] == 0) {
-            second = code[second];
-        }
+        ArgMode argMode1 = ArgModeFactory.getArgMode((code[pointer] / 100) % 10);
+        ArgMode argMode2 = ArgModeFactory.getArgMode((code[pointer] / 1000));
+        int first = argMode1.getValue(code, pointer + 1);
+        int second = argMode2.getValue(code, pointer + 2);
         int outputIndex = code[pointer + 3];
         code[outputIndex] = (first == second) ? 1 : 0;
-        return new Context(pointer + 4, code, context.getInputs(), context.getOutput());
+        return new Context(pointer + 4, code, context.getInputs(), context.getOutput(), context.getRelativeBase());
     }
 }

@@ -9,7 +9,7 @@ public class CodeComputer {
 
     public static void main(String[] args) {
         int[] diagnosticTests = InputStorage.getDiagnosticTests();
-        Context context = new Context(0, diagnosticTests, new long[]{Integer.parseInt(args[0])}, "");
+        Context context = new Context(0, diagnosticTests, new long[]{Integer.parseInt(args[0])}, "", 0);
         while (context.getPointer() < context.getCode().length) {
             context = new CodeComputer().execute(context);
         }

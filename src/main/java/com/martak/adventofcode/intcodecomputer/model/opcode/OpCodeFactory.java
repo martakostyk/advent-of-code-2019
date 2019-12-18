@@ -20,6 +20,8 @@ public class OpCodeFactory {
                 return new OpCode7();
             case 8:
                 return new OpCode8();
+            case 9:
+                return new OpCode9();
             case 99:
                 return new OpCode99();
             default:

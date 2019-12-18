@@ -1,18 +1,18 @@
 package com.martak.adventofcode.intcodecomputer.model;
 
-import java.util.Arrays;
-
 public class Context {
     private final int pointer;
     private final int[] code;
     private long[] inputs;
     private String output;
+    private final int relativeBase;
 
-    public Context(int pointer, int[] code, long[] inputs, String output) {
+    public Context(int pointer, int[] code, long[] inputs, String output, int relativeBase) {
         this.pointer = pointer;
         this.code = code;
         this.inputs = inputs;
         this.output = output;
+        this.relativeBase = relativeBase;
     }
 
     public int getPointer() {
@@ -35,9 +35,7 @@ public class Context {
         return output;
     }
 
-    @Override
-    public String toString() {
-        return "Context{p: " + pointer + ", output:" + output
-                    + ", inputs:" + Arrays.toString(inputs) + ", code:" + Arrays.toString(code) + "}";
+    public int getRelativeBase() {
+        return relativeBase;
     }
 }

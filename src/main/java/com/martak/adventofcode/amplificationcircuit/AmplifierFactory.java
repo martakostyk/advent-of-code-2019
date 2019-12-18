@@ -13,7 +13,7 @@ public class AmplifierFactory {
         List<Amplifier> amplifiers = new ArrayList<>(phaseSequence.length);
         for (int i = 0; i < 5; i++) {
             long[] inputs = {phaseSequence[i], 0};
-            Context context = new Context(0, Arrays.copyOf(controllerSoftware, controllerSoftware.length), inputs, "");
+            Context context = new Context(0, Arrays.copyOf(controllerSoftware, controllerSoftware.length), inputs, "", 0);
             amplifiers.add(new Amplifier(new CodeComputer(), context));
         }
         return amplifiers;
