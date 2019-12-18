@@ -11,7 +11,7 @@ public class OpCode9 implements OpCode {
         int[] code = context.getCode();
         int pointer = context.getPointer();
         ArgMode argMode = ArgModeFactory.getArgMode((code[pointer] / 100) % 10);
-        int relativeBase = context.getRelativeBase() + argMode.getValue(code, pointer + 1);
+        int relativeBase = context.getRelativeBase() + argMode.getValue(context, pointer + 1);
         return new Context(pointer + 2, code, context.getInputs(), context.getOutput(), relativeBase);
     }
 }

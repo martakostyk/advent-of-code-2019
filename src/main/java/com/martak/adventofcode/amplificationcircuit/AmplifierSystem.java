@@ -1,14 +1,13 @@
 package com.martak.adventofcode.amplificationcircuit;
 
-import com.martak.adventofcode.utils.InputStorage;
+import com.martak.adventofcode.utils.ProgramStorage;
 
-import java.util.Arrays;
 import java.util.List;
 
 public class AmplifierSystem {
 
     public static void main(String[] args) {
-        int[] controllerSoftware = InputStorage.getControllerSoftware();
+        int[] controllerSoftware = ProgramStorage.getControllerSoftware();
 
 //        int[][] phaseSequences1 = PhaseSequenceGenerator.getAllCombinations(0, 4);
 //        String theBiggest1 = findTheBiggestOutputSignal(phaseSequences1, controllerSoftware);

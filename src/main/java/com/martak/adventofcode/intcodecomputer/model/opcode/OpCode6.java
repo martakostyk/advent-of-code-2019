@@ -12,8 +12,8 @@ public class OpCode6 implements OpCode {
         int pointer = context.getPointer();
         ArgMode argMode1 = ArgModeFactory.getArgMode((code[pointer] / 100) % 10);
         ArgMode argMode2 = ArgModeFactory.getArgMode((code[pointer] / 1000));
-        int first = argMode1.getValue(code, pointer + 1);
-        int second = argMode2.getValue(code, pointer + 2);
+        int first = argMode1.getValue(context, pointer + 1);
+        int second = argMode2.getValue(context, pointer + 2);
         if (first == 0) {
             pointer = second;
         } else {
