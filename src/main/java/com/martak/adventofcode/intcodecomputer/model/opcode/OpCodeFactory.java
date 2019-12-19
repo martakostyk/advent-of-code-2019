@@ -1,9 +1,12 @@
 package com.martak.adventofcode.intcodecomputer.model.opcode;
 
+import java.math.BigDecimal;
+import java.math.BigInteger;
+
 public class OpCodeFactory {
 
-    public static OpCode getOpCode(int instruction) {
-        switch (instruction % 100) {
+    public static OpCode getOpCode(BigInteger instruction) {
+        switch (instruction.intValue() % 100) {
             case 1:
                 return new OpCode1();
             case 2:
@@ -25,7 +28,7 @@ public class OpCodeFactory {
             case 99:
                 return new OpCode99();
             default:
-                throw new IllegalArgumentException("unknown opcode " + instruction % 100);
+                throw new IllegalArgumentException("unknown opcode " + instruction.intValue() % 100);
         }
     }
 }

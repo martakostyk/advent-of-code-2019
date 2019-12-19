@@ -3,16 +3,18 @@ package com.martak.adventofcode.intcodecomputer;
 import com.martak.adventofcode.intcodecomputer.model.Context;
 import com.martak.adventofcode.intcodecomputer.model.opcode.OpCode;
 import com.martak.adventofcode.intcodecomputer.model.opcode.OpCodeFactory;
-import com.martak.adventofcode.utils.ProgramStorage;
+import com.martak.adventofcode.utils.InitialValues;
+import com.martak.adventofcode.utils.ProgramInitializer;
+
+import java.math.BigInteger;
 
 public class CodeComputer {
 
-    private static final int INPUT = 5;
 
     public static void main(String[] args) {
-        int[] diagnosticTests = ProgramStorage.getDiagnosticTests();
-        int[] program = ProgramStorage.initializeProgram(diagnosticTests);
-        Context context = new Context(0, program, new long[]{INPUT}, "", 0);
+        BigInteger[] diagnosticTests = ProgramInitializer.getDiagnosticTests();
+        BigInteger[] inputs = {InitialValues.INPUT};
+        Context context = new Context(InitialValues.POINTER, diagnosticTests, inputs, InitialValues.OUTPUT, InitialValues.RELATIVE_BASE);
         while (context.getPointer() < context.getCode().length) {
             context = new CodeComputer().execute(context);
         }

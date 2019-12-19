@@ -1,13 +1,15 @@
 package com.martak.adventofcode.intcodecomputer.model;
 
+import java.math.BigInteger;
+
 public class Context {
     private final int pointer;
-    private final int[] code;
-    private long[] inputs;
+    private final BigInteger[] code;
+    private BigInteger[] inputs;
     private String output;
     private final int relativeBase;
 
-    public Context(int pointer, int[] code, long[] inputs, String output, int relativeBase) {
+    public Context(int pointer, BigInteger[] code, BigInteger[] inputs, String output, int relativeBase) {
         this.pointer = pointer;
         this.code = code;
         this.inputs = inputs;
@@ -19,15 +21,15 @@ public class Context {
         return pointer;
     }
 
-    public int[] getCode() {
+    public BigInteger[] getCode() {
         return code;
     }
 
-    public long[] getInputs() {
+    public BigInteger[] getInputs() {
         return inputs;
     }
 
-    public void setInputs(long[] inputs) {
+    public void setInputs(BigInteger[] inputs) {
         this.inputs = inputs;
     }
 

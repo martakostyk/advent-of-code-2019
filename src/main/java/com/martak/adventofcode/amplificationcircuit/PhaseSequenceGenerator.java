@@ -1,11 +1,13 @@
 package com.martak.adventofcode.amplificationcircuit;
 
+import java.math.BigInteger;
+
 public class PhaseSequenceGenerator {
 
-    public static int[][] getAllCombinations(int min, int max) {
+    public static BigInteger[][] getAllCombinations(int min, int max) {
         int numOfPhases = max - min + 1;
         int numOfCombinations = getNumOfCombinations(numOfPhases);
-        int[][] phaseSequences = new int[numOfCombinations][numOfPhases];
+        BigInteger[][] phaseSequences = new BigInteger[numOfCombinations][numOfPhases];
         int phaseSequenceIndex = 0;
         for (int i = min; i <= max; i++) {
             for (int j = min; j <= max; j++) {
@@ -16,11 +18,11 @@ public class PhaseSequenceGenerator {
                                 if (l != i && l != j && l != k) {
                                     for (int m = min; m <= max; m++) {
                                         if (m != i && m != j && m != k && m != l) {
-                                            phaseSequences[phaseSequenceIndex][0] = i;
-                                            phaseSequences[phaseSequenceIndex][1] = j;
-                                            phaseSequences[phaseSequenceIndex][2] = k;
-                                            phaseSequences[phaseSequenceIndex][3] = l;
-                                            phaseSequences[phaseSequenceIndex][4] = m;
+                                            phaseSequences[phaseSequenceIndex][0] = BigInteger.valueOf(i);
+                                            phaseSequences[phaseSequenceIndex][1] = BigInteger.valueOf(j);
+                                            phaseSequences[phaseSequenceIndex][2] = BigInteger.valueOf(k);
+                                            phaseSequences[phaseSequenceIndex][3] = BigInteger.valueOf(l);
+                                            phaseSequences[phaseSequenceIndex][4] = BigInteger.valueOf(m);
                                             phaseSequenceIndex++;
                                         }
 
