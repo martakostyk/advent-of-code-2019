@@ -7,8 +7,6 @@ import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import java.math.BigInteger;
-
 public class CodeComputerTest {
 
 
@@ -21,8 +19,8 @@ public class CodeComputerTest {
 
     @Test(dataProvider = "diagnosticTests")
     public void shouldOutput0WhenInputIs0(String diagnosticTests) {
-        BigInteger[] program = ProgramInitializer.initializeProgram(diagnosticTests);
-        BigInteger[] inputs = new BigInteger[]{BigInteger.valueOf(0)};
+        long[] program = ProgramInitializer.initializeProgram(diagnosticTests);
+        long[] inputs = {0};
         Context context = new Context(InitialValues.POINTER, program, inputs, InitialValues.OUTPUT,
                 InitialValues.RELATIVE_BASE);
         context = new CodeComputer().execute(context);
@@ -31,8 +29,8 @@ public class CodeComputerTest {
 
     @Test(dataProvider = "diagnosticTests")
     public void shouldOutput1WhenInputIs1(String diagnosticTests) {
-        BigInteger[] program = ProgramInitializer.initializeProgram(diagnosticTests);
-        BigInteger[] inputs = new BigInteger[]{BigInteger.valueOf(1)};
+        long[] program = ProgramInitializer.initializeProgram(diagnosticTests);
+        long[] inputs = {1};
         Context context = new Context(InitialValues.POINTER, program, inputs, InitialValues.OUTPUT,
                 InitialValues.RELATIVE_BASE);
         context = new CodeComputer().execute(context);
@@ -41,8 +39,8 @@ public class CodeComputerTest {
 
     @Test
     public void shouldOutput16DigitNumber() {
-        BigInteger[] program = ProgramInitializer.initializeProgram("1102, 34915192, 34915192, 7, 4, 7, 99, 0");
-        BigInteger[] inputs = new BigInteger[]{};
+        long[] program = ProgramInitializer.initializeProgram("1102, 34915192, 34915192, 7, 4, 7, 99, 0");
+        long[] inputs = {};
         Context context = new Context(InitialValues.POINTER, program, inputs, InitialValues.OUTPUT,
                 InitialValues.RELATIVE_BASE);
         context = new CodeComputer().execute(context);
@@ -52,8 +50,8 @@ public class CodeComputerTest {
 
     @Test
     public void shouldOutputNumberInTheMiddle() {
-        BigInteger[] program = ProgramInitializer.initializeProgram("104, 1125899906842624, 99");
-        BigInteger[] inputs = new BigInteger[]{};
+        long[] program = ProgramInitializer.initializeProgram("104, 1125899906842624, 99");
+        long[] inputs = {};
         Context context = new Context(InitialValues.POINTER, program, inputs, InitialValues.OUTPUT,
                 InitialValues.RELATIVE_BASE);
         context = new CodeComputer().execute(context);

@@ -6,6 +6,7 @@ public class OpCode99 implements OpCode {
 
     @Override
     public Context execute(Context context) {
-        return new Context(context.getCode().length, context.getCode(), context.getInputs(), context.getOutput(), context.getRelativeBase());
+        return new Context(context.getCode().length, context.getCode(), context.getInputs(),
+                context.getOutput(), context.getRelativeBase());
     }
 }
