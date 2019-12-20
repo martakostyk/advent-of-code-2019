@@ -1,5 +1,7 @@
 package com.martak.adventofcode.monitoringstation;
 
+import com.martak.adventofcode.monitoringstation.model.Asteroid;
+import com.martak.adventofcode.monitoringstation.model.AsteroidMapParser;
 import org.assertj.core.api.Assertions;
 import org.testng.annotations.Test;
 
@@ -10,10 +12,9 @@ public class AsteroidMapTest {
     @Test
     public void shouldParseMapCorrectly() {
         // given
-        String[] map = {".#..#", ".....", "#####", "....#", "...##"};
+        List<String> map = List.of(".#..#", ".....", "#####", "....#", "...##");
         // when
-        AsteroidMap asteroidMap = AsteroidMap.parse(map);
-        List<Asteroid> asteroids = asteroidMap.getAsteroids();
+        List<Asteroid> asteroids = AsteroidMapParser.parse(map);
         Asteroid asteroid = asteroids.get(0);
         // then
         Assertions.assertThat(asteroids.size()).isEqualTo(10);

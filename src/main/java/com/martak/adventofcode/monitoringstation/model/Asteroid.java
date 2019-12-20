@@ -1,4 +1,4 @@
-package com.martak.adventofcode.monitoringstation;
+package com.martak.adventofcode.monitoringstation.model;
 
 public class Asteroid {
 
@@ -10,11 +10,11 @@ public class Asteroid {
         this.y = y;
     }
 
-    int getX() {
+    public int getX() {
         return x;
     }
 
-    int getY() {
+    public int getY() {
         return y;
     }
 
