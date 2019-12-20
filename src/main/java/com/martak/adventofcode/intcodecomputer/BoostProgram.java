@@ -12,8 +12,6 @@ public class BoostProgram {
         Context context = new Context(InitialValues.POINTER, boostProgram, inputs, InitialValues.OUTPUT, InitialValues.RELATIVE_BASE);
         while (context.getPointer() < context.getCode().length) {
             context = new CodeComputer().execute(context);
-            System.out.println(context.getOutput());
         }
-        System.out.println("Boost keycode " + context.getOutput());
     }
 }

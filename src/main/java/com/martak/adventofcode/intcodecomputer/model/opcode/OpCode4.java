@@ -12,6 +12,7 @@ public class OpCode4 implements OpCode {
         int pointer = context.getPointer();
         ArgMode argMode = ArgModeFactory.getArgMode((int) ((code[pointer]) / 100) % 10);
         long output = argMode.getValue(context, pointer + 1);
+        System.out.println(output);
         return new Context(pointer + 2, code, context.getInputs(), String.valueOf(output), context.getRelativeBase());
     }
 }

@@ -13,6 +13,5 @@ public class DiagnosticTests {
         while (context.getPointer() < context.getCode().length) {
             context = new CodeComputer().execute(context);
         }
-        System.out.println("Code computer output " + context.getOutput());
     }
 }

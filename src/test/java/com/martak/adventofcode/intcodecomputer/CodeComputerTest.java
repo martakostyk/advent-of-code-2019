@@ -57,4 +57,16 @@ public class CodeComputerTest {
         context = new CodeComputer().execute(context);
         Assert.assertEquals(context.getOutput(), "1125899906842624");
     }
+
+    @Test
+    public void shouldOutputCopyOfItself() {
+        long[] program = ProgramInitializer
+                .initializeProgram("109,1,204,-1,1001,100,1,100,1008,100,16,101,1006,101,0,99");
+        long[] inputs = {};
+        Context context = new Context(InitialValues.POINTER, program, inputs, InitialValues.OUTPUT,
+                InitialValues.RELATIVE_BASE);
+        while (context.getPointer() < context.getCode().length) {
+            context = new CodeComputer().execute(context);
+        }
+    }
 }
