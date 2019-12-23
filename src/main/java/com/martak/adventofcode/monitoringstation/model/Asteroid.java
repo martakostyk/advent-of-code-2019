@@ -5,7 +5,7 @@ public class Asteroid {
     private final int x;
     private final int y;
 
-    Asteroid(int x, int y) {
+    public Asteroid(int x, int y) {
         this.x = x;
         this.y = y;
     }
